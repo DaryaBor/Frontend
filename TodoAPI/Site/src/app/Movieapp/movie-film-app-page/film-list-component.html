@@ -1,0 +1,54 @@
+<mat-card-content>
+  <h3>Films</h3>
+      <tl-film-list-item *ngIf="items?.length > 0"
+                          [dataSource]="items"
+                          (delete)="deleteFilm($event)">
+      </tl-film-list-item>
+</mat-card-content>
+
+<mat-card-actions class="form">
+  <form [formGroup]="form">
+      <mat-form-field class="example-form-field" appearance="fill">
+          <mat-label>Id</mat-label>
+          <input matInput placeholder="id" formControlName="id" matInput type="id">
+          <button *ngIf="idControl.value" matSuffix mat-icon-button aria-label="Clear"
+                  (click)="idControl.setValue(null)">
+              <mat-icon>close</mat-icon>
+          </button>
+      </mat-form-field>
+  </form>
+  <form [formGroup]="form">
+      <mat-form-field class="example-form-field" appearance="fill">
+          <mat-label>Denimonation</mat-label>
+          <input formControlName="denomination" matInput type="text">
+          <button *ngIf="denominationControl.value" matSuffix mat-icon-button aria-label="Clear"
+                  (click)="nameControl.setValue(null)">
+              <mat-icon>close</mat-icon>
+          </button>
+      </mat-form-field>
+  </form>
+  <form [formGroup]="form">
+      <mat-form-field class="example-form-field" appearance="fill">
+          <mat-label>DateStart</mat-label>
+          <input formControlName="dateStart" matInput type="number">
+          <button *ngIf="dateStartControl.value" matSuffix mat-icon-button aria-label="Clear"
+                  (click)="dateStartControl.setValue(null)">
+              <mat-icon>close</mat-icon>
+          </button>
+      </mat-form-field>
+  </form>
+  <form [formGroup]="form">
+      <mat-form-field class="example-form-field" appearance="fill">
+          <mat-label>Company</mat-label>
+          <input formControlName="company" matInput type="string">
+          <button *ngIf="companyControl.value" matSuffix mat-icon-button aria-label="Clear"
+                  (click)="companyControl.setValue(null)">
+              <mat-icon>close</mat-icon>
+          </button>
+      </mat-form-field>
+  </form>
+  <button mat-flat-button color="accent" (click)="addItem()">Create</button>
+  <button style="margin: 0px 10px" mat-flat-button color="primary" (click)="deleteFilm()">Delete</button>
+</mat-card-actions>
+
+</mat-card>
