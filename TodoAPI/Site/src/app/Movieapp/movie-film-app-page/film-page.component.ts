@@ -50,14 +50,14 @@ export class FilmListPageComponent implements OnInit {
             denomination: this.denominationControl.value,
             dateStart: this.dateStartControl.value,
             company: this.companyControl.value
-        }).subscribe(() => {
+        });
             this.reloadFilm();
             this.denominationControl.setValue;
             this.dateStartControl.setValue;
             this.companyControl.setValue;
             this.form.markAsUntouched();
-        });
-    }
+        }
+    
 
     public updateFilm(): void {
         this.filmService.updateFilm({
@@ -65,35 +65,35 @@ export class FilmListPageComponent implements OnInit {
                 denomination: this.denominationControl.value,
                 dateStart: this.dateStartControl.value,
                 company: this.companyControl.value
-        }).subscribe(() => {
-            this.reloadFilm();
-            this.denominationControl.setValue(null);
-            this.dateStartControl.setValue(null);
-            this.companyControl.setValue(null);
-            this.form.markAsUntouched();
         });
-    }
+            this.reloadFilm();
+            this.denominationControl.setValue;
+            this.dateStartControl.setValue(null);
+            this.companyControl.setValue;
+            this.form.markAsUntouched();
+        };
+    
    
 
     public deleteFilm(todo: IFilm): void {
-        this.filmService.deleteFilmById(todo.id).subscribe(() => {
+        this.filmService.deleteFilmById(todo.id) 
             this.reloadFilm();
-        });
+        
     }
 
-    get idControl(): AbstractControl {
-        return this.form.get('id');
+    get idControl(): FormControl<number> {
+        return this.form.get('id') as FormControl<number> ;
     }
 
-    get denominationControl(): AbstractControl {
-        return this.form.get('denomination');
+    get denominationControl(): FormControl<string>  {
+        return this.form.get('denomination') as  FormControl<string>;
     }
 
-    get dateStartNumberControl(): AbstractControl {
-        return this.form.get('dateStart');
+    get dateStartNumberControl():  FormControl<number> {
+        return this.form.get('dateStart') as  FormControl<number>;
     }
     
-    get companyControl(): AbstractControl {
-        return this.form.get('company');
+    get companyControl():  FormControl<string> {
+        return this.form.get('company') as  FormControl<string>;
     }
 }
