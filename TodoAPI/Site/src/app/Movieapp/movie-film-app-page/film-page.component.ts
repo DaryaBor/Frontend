@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { IFilm } from "../../Shared/film.interface";
-import { ISeance } from "../../Shared/seance.interface";
-import { ITickets } from "../../Shared/tickets.interface";
-import { FilmService } from "../../Shared/film.service";
+import { IFilm } from "../Shared/film.interface";
+import { ISeance } from "../Shared/seance.interface";
+import { ITickets } from "../Shared/tickets.interface";
+import { FilmService } from "../Shared/film.service";
 import {MatExpansionModule} from '@angular/material/expansion';
 import { AbstractControl, FormControl, FormGroup, Validators } from "@angular/forms";
+import {MatCardModule} from '@angular/material/card'; 
 
 
 @Component({

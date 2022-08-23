@@ -1,3 +1,5 @@
+<mat-card>
+<mat-card-title>Films</mat-card-title>
 <mat-card-content>
   <h3>Films</h3>
       <tl-film-list-item *ngIf="items?.length > 0"
@@ -50,5 +52,4 @@
   <button mat-flat-button color="accent" (click)="addItem()">Create</button>
   <button style="margin: 0px 10px" mat-flat-button color="primary" (click)="deleteFilm()">Delete</button>
 </mat-card-actions>
-
 </mat-card>
