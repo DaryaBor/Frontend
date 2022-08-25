@@ -10,6 +10,7 @@ import { MatInputModule } from "@angular/material/input";
 import {  MatTableModule } from '@angular/material/table';
 
 
+
 @NgModule({
   declarations: [
     AppComponent
@@ -25,7 +26,7 @@ import {  MatTableModule } from '@angular/material/table';
     MatListModule,
     MatTableModule
   ],
- 
+  
 
   providers: [],
   bootstrap: [AppComponent]

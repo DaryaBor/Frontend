@@ -1,15 +1,18 @@
 ﻿using TodoAPI.Models;
 using TodoAPI.Dto;
 using TodoAPI.Repositories;
+using TodoAPI.Infrastructure.UoW;
+
 namespace TodoAPI.Services
 {
     public  class TicketsService : ITicketsService
     {
         private readonly ITicketsRepository _ticketsRepository;
-
-        public TicketsService(ITicketsRepository ticketsRepository)
+        private readonly IUnitOfWork _unitOfWork;
+        public TicketsService(ITicketsRepository ticketsRepository, IUnitOfWork unitOfWork)
         {
             _ticketsRepository = ticketsRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public List<Tickets> GetTickets()
@@ -26,7 +29,9 @@ namespace TodoAPI.Services
 
             Tickets ticketEntity = ticket.ConvertToTickets();
 
-            return _ticketsRepository.Create(ticketEntity);
+            int id =  _ticketsRepository.Create(ticketEntity);
+            _unitOfWork.Commit();
+            return id;
         }
 
         public void DeleteTicket(int ticketId)
@@ -38,6 +43,7 @@ namespace TodoAPI.Services
             }
 
             _ticketsRepository.Delete(ticket);
+            _unitOfWork.Commit();
         }
 
         public Tickets GetTicket(int ticketId)

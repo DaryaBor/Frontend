@@ -1,9 +1,9 @@
-using System.Data;
-using System.Data.SqlClient;
-using System.Xml.Linq;
-using TodoAPI.Models;
-using TodoAPI.Services;
 using TodoAPI.Repositories;
+using TodoAPI.Services;
+using TodoAPI.Infrastructure.UoW;
+using Microsoft.EntityFrameworkCore;
+using TodoAPI.Infrastructure;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,21 +12,32 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 
-builder.Services.AddScoped<IFilmRepository>(s => new FilmRepository(builder.Configuration.GetValue<string>("DefaultConnection")));
+builder.Services.AddDbContext<MovieDbContext>(c =>
+{
+    try
+    {
+        string connectionString = builder.Configuration.GetValue<string>("DefaultConnection");
+        c.UseSqlServer(connectionString);
+    }
+    catch (Exception)
+    {
+        //var message = ex.Message;
+    }
+});
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+builder.Services.AddScoped<IFilmRepository, FilmRepository>();
+builder.Services.AddScoped<ISeanceRepository, SeanceRepository>();
+builder.Services.AddScoped<ITicketsRepository, TicketsRepository>();
+
 builder.Services.AddScoped<IFilmService, FilmService>();
-
-builder.Services.AddScoped<ISeanceRepository>(s => new SeanceRepository(builder.Configuration.GetValue<string>("DefaultConnection")));
 builder.Services.AddScoped<ISeanceService, SeanceService>();
-
-builder.Services.AddScoped<ITicketsRepository>(s => new TicketsRepository(builder.Configuration.GetValue<string>("DefaultConnection")));
 builder.Services.AddScoped<ITicketsService, TicketsService>();
 
 
+
 var app = builder.Build();
-
-
-
-
 app.MapControllers();
 
-app.Run();
+    app.Run();
+

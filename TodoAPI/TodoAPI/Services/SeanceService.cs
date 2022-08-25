@@ -1,24 +1,26 @@
 ﻿using TodoAPI.Models;
 using TodoAPI.Dto;
 using TodoAPI.Repositories;
+using TodoAPI.Infrastructure.UoW;
 
 namespace TodoAPI.Services
 {
     public class SeanceService : ISeanceService
     {
         private readonly ISeanceRepository _seanceRepository;
-
-        public SeanceService(ISeanceRepository seanceRepository)
+        private readonly IUnitOfWork _unitOfWork;
+        public SeanceService(ISeanceRepository seanceRepository, IUnitOfWork unitOfWork)
         {
             _seanceRepository = seanceRepository;
+            _unitOfWork = unitOfWork;
         }
 
-        public List<Seance> GetSeancec()
+        public List<Seance> GetSeances()
         {
             return _seanceRepository.GetSeances();
         }
 
-        public int CreateGroup(SeanceDto seance)
+        public int CreateSeance(SeanceDto seance)
         {
             if (seance == null)
             {
@@ -27,7 +29,9 @@ namespace TodoAPI.Services
 
             Seance seanceEntity = seance.ConvertToSeance();
 
-            return _seanceRepository.Create(seanceEntity);
+            int id = _seanceRepository.Create(seanceEntity);
+            _unitOfWork.Commit();
+            return id;
         }
 
         public void DeleteSeance(int seanceId)
@@ -39,6 +43,7 @@ namespace TodoAPI.Services
             }
 
             _seanceRepository.Delete(seance);
+            _unitOfWork.Commit();
         }
 
         public Seance GetSeance(int seanceId)

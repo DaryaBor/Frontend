@@ -1,17 +1,21 @@
 ﻿using TodoAPI.Models;
 using TodoAPI.Dto;
 using TodoAPI.Repositories;
+using TodoAPI.Services;
+using  TodoAPI.Infrastructure.UoW;
+
 namespace TodoAPI.Services
 {
     
         public class FilmService : IFilmService
         {
             private readonly IFilmRepository _filmRepository;
-
-            public FilmService (IFilmRepository filmRepository)
+            private readonly IUnitOfWork _unitOfWork;
+        public FilmService (IFilmRepository filmRepository, IUnitOfWork unitOfWork)
             {
                 _filmRepository = filmRepository;
-            }
+                 _unitOfWork = unitOfWork;
+        }
 
             public List<Film> GetFilms()
             {
@@ -27,8 +31,11 @@ namespace TodoAPI.Services
 
                 Film filmEntity = film.ConvertToFilm();
 
-                return _filmRepository.Create(filmEntity);
-            }
+                int id = _filmRepository.Create(filmEntity);
+                _unitOfWork.Commit();
+
+            return id;
+        }
 
             public void DeleteFilm(int filmId)
             {
@@ -39,7 +46,8 @@ namespace TodoAPI.Services
                 }
 
                 _filmRepository.Delete(film);
-            }
+            _unitOfWork.Commit();
+        }
 
             public Film GetFilm(int filmId)
             {

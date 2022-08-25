@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { IFilm } from "../Shared/film.interface";
+import { DataSource } from '@angular/cdk/table';
 
 @Component({
   selector: 'tl-film-list-item',
@@ -8,7 +9,7 @@ import { IFilm } from "../Shared/film.interface";
 
 export class FilmListItemComponent {
   displayedColumns: string[] = ['id','denomination','dateStart','company'];
-  @Input() public dataSource: IFilm[];
+  @Input() public dataSource: IFilm[]=[];
   @Output() public add: EventEmitter<IFilm> = new EventEmitter<IFilm>();
   @Output() public delete: EventEmitter<IFilm> = new EventEmitter<IFilm>();
 
