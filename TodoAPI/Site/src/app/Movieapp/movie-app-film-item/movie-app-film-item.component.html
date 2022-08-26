@@ -1,4 +1,4 @@
-<table mat-table [dataSource]="dataSource" class="FilmTable">
+<table mat-table class="FilmTable">
 
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef> Фильм </th>
@@ -20,16 +20,7 @@
       <td mat-cell *matCellDef="let element"> {{element.company}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="delete">
-      <th mat-header-cell *matHeaderCellDef>Удалить</th>
-      <td mat-cell *matCellDef="let element"><button mat-button (click)="deleteClicked(element)">удалить</button></td>
-    </ng-container>
-
-    <ng-container matColumnDef="add">
-      <th mat-header-cell *matHeaderCellDef>Добавить</th>
-      <td mat-cell *matCellDef="let element"><button mat-button (click)="addClicked(element)">добавить</button></td>
-    </ng-container>
-
+    
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>

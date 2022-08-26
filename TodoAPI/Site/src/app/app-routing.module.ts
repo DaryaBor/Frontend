@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { FilmListPageComponent } from "./Movieapp/movie-film-app-page/film-page.component";
 const routes: Routes = [
   {
-    path: '**',
+    path: '*',
     component: FilmListPageComponent
   }
 ];

@@ -7,7 +7,7 @@ import { HttpClient } from "@angular/common/http";
 
 @Injectable()
 export class FilmService {
-  private readonly apiUrl: string = 'http://localhost:4200';
+  private readonly apiUrl: string = 'http://localhost:4200/api';
 
   constructor(private httpClient: HttpClient) {
   }

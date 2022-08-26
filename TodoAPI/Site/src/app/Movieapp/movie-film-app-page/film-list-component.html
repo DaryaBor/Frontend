@@ -1,55 +1,60 @@
-<mat-card>
-<mat-card-title>Films</mat-card-title>
-<mat-card-content>
+
+<form class="example-container" >
+<mat-form-field appearance="fill" >
+    <mat-label>Films</mat-label>
+    <mat-card-content>
   <h3>Films</h3>
       <tl-film-list-item *ngIf="items?.length > 0"
                           [dataSource]="items"
                           (delete)="deleteFilm($event)">
       </tl-film-list-item>
-</mat-card-content>
+    </mat-card-content>
 
-<mat-card-actions class="form">
-  <form [formGroup]="form">
-      <mat-form-field class="example-form-field" appearance="fill">
+<mat-card-actions>
+  <form class="example-container" [formGroup]="options">
+      <mat-form-field appearance="fill" [id]="idControl.value">
           <mat-label>Id</mat-label>
-          <input matInput placeholder="id" formControlName="id" matInput type="id">
+          <mat-select [formControl]="idControl">
           <button *ngIf="idControl.value" matSuffix mat-icon-button aria-label="Clear"
                   (click)="idControl.setValue(null)">
               <mat-icon>close</mat-icon>
           </button>
+        </mat-select>
       </mat-form-field>
-  </form>
-  <form [formGroup]="form">
+      &nbsp; 
+
       <mat-form-field class="example-form-field" appearance="fill">
           <mat-label>Denimonation</mat-label>
-          <input formControlName="denomination" matInput type="text">
+          <mat-select [formControl]="denominationControl">
           <button *ngIf="denominationControl.value" matSuffix mat-icon-button aria-label="Clear"
                   (click)="nameControl.setValue(null)">
               <mat-icon>close</mat-icon>
           </button>
+        </mat-select>
       </mat-form-field>
-  </form>
-  <form [formGroup]="form">
+      &nbsp;
+ 
       <mat-form-field class="example-form-field" appearance="fill">
           <mat-label>DateStart</mat-label>
-          <input formControlName="dateStart" matInput type="number">
+          <mat-select [formControl]="dateStartControl">
           <button *ngIf="dateStartControl.value" matSuffix mat-icon-button aria-label="Clear"
                   (click)="dateStartControl.setValue(null)">
               <mat-icon>close</mat-icon>
           </button>
+        </mat-select>
       </mat-form-field>
-  </form>
-  <form [formGroup]="form">
+      &nbsp;
+ 
       <mat-form-field class="example-form-field" appearance="fill">
           <mat-label>Company</mat-label>
-          <input formControlName="company" matInput type="string">
+          <mat-select [formControl]="companyControl">
           <button *ngIf="companyControl.value" matSuffix mat-icon-button aria-label="Clear"
                   (click)="companyControl.setValue(null)">
               <mat-icon>close</mat-icon>
           </button>
+        </mat-select>
       </mat-form-field>
+      <button mat-flat-button color="accent" (click)="addItem()">Create</button>
+      <button style="margin: 0px 10px" mat-flat-button color="primary" (click)="deleteFilm($event)">Delete</button>
   </form>
-  <button mat-flat-button color="accent" (click)="addItem()">Create</button>
-  <button style="margin: 0px 10px" mat-flat-button color="primary" (click)="deleteFilm()">Delete</button>
 </mat-card-actions>
-</mat-card>

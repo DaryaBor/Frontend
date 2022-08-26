@@ -4,7 +4,7 @@ import { ISeance } from "../Shared/seance.interface";
 import { ITickets } from "../Shared/tickets.interface";
 import { FilmService } from "../Shared/film.service";
 import {MatExpansionModule} from '@angular/material/expansion';
-import { AbstractControl, FormControl, FormGroup, Validators } from "@angular/forms";
+import { AbstractControl, FormControl, FormGroup, Validators, FormBuilder } from "@angular/forms";
 import {MatCardModule} from '@angular/material/card'; 
 
 
@@ -18,11 +18,21 @@ import {MatCardModule} from '@angular/material/card';
 export class FilmListPageComponent implements OnInit {
     public items: IFilm[]=[];
     public form!: FormGroup;
-    dateStartControl:any;
-
-    constructor(private filmService: FilmService) {
+    //dateStartControl:any;
+    options = this._formBuilder.group({
+     id: this.idControl,
+    denomination : this.denominationControl,
+    dateStart: this.dateStartControl,
+    company: this.companyControl,
+    });
+    
+    constructor(private _formBuilder: FormBuilder, private filmService: FilmService) {
         this.reloadFilm();
     }
+
+    //constructor(private filmService: FilmService) {
+       //this.reloadFilm();
+    //}
 
     public reloadFilm(): void {
         this.filmService.getFilm().subscribe(films => {
@@ -30,7 +40,8 @@ export class FilmListPageComponent implements OnInit {
         })
     }
 
-    
+   public  FormControl(){ 
+   }
 
     public ngOnInit(): void {
         this.form = new FormGroup({
@@ -78,11 +89,13 @@ export class FilmListPageComponent implements OnInit {
     public deleteFilm(todo: IFilm): void {
         this.filmService.deleteFilmById(todo.id) 
             this.reloadFilm();
+
+      
         
     }
 
     get idControl(): FormControl<number> {
-        return this.form.get('id') as FormControl<number> ;
+        return this.options.get('id') as FormControl<number> ;
     }
 
     get denominationControl(): FormControl<string>  {

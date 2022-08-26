@@ -9,7 +9,7 @@ import { DataSource } from '@angular/cdk/table';
 
 export class FilmListItemComponent {
   displayedColumns: string[] = ['id','denomination','dateStart','company'];
-  @Input() public dataSource: IFilm[]=[];
+  @Input() public! : IFilm;
   @Output() public add: EventEmitter<IFilm> = new EventEmitter<IFilm>();
   @Output() public delete: EventEmitter<IFilm> = new EventEmitter<IFilm>();
 
