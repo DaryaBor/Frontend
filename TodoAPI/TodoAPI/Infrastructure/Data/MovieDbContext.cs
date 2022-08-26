@@ -17,6 +17,13 @@ namespace TodoAPI.Infrastructure
         {
         }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer("Data Source = USER - PC/SQLEXPRESS; Initial Catalog = Moviesdb; Integrated Security = SSPI");
+            }
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new FilmMap());
