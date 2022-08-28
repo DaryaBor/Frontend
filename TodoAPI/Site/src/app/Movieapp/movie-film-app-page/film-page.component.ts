@@ -10,24 +10,25 @@ import {MatCardModule} from '@angular/material/card';
 
 @Component({
     selector:'film-list-page',
-    templateUrl: './film-list-component.html',
+    templateUrl: 'film-list-component.html',
     styleUrls: [],
     providers: [FilmService]
 })
 
-export class FilmListPageComponent implements OnInit {
+export class FilmListPageComponent  {
     public items: IFilm[]=[];
     public form!: FormGroup;
-    //dateStartControl:any;
+    dateStartControl = new FormControl();
     options = this._formBuilder.group({
      id: this.idControl,
     denomination : this.denominationControl,
     dateStart: this.dateStartControl,
     company: this.companyControl,
     });
+   
     
     constructor(private _formBuilder: FormBuilder, private filmService: FilmService) {
-        this.reloadFilm();
+        //this.reloadFilm();
     }
 
     //constructor(private filmService: FilmService) {
@@ -40,8 +41,7 @@ export class FilmListPageComponent implements OnInit {
         })
     }
 
-   public  FormControl(){ 
-   }
+
 
     public ngOnInit(): void {
         this.form = new FormGroup({

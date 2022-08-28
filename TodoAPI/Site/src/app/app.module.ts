@@ -26,7 +26,9 @@ import {  MatTableModule } from '@angular/material/table';
     MatListModule,
     MatTableModule
   ],
-  
+  exports: [
+    MatFormFieldModule,
+    MatInputModule,    ],
 
   providers: [],
   bootstrap: [AppComponent]
